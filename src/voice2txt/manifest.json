@@ -1,0 +1,42 @@
+{
+  "manifest_version": 3,
+  "name": "voice2txt",
+  "version": "1.1.0",
+  "minimum_chrome_version": "116",
+  "description": "Voice type across the web using browser-native speech recognition.",
+  "permissions": [
+    "activeTab",
+    "storage",
+    "scripting",
+    "offscreen",
+    "contextMenus",
+    "webNavigation",
+    "sidePanel",
+    "notifications",
+    "alarms"
+  ],
+  "action": {},
+  "side_panel": {
+    "default_path": "sidepanel.html"
+  },
+  "options_page": "options.html",
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "all_frames": true
+    }
+  ],
+  "commands": {
+    "toggle-dictation": {
+      "suggested_key": {
+        "default": "Alt+L",
+        "mac": "MacCtrl+Shift+L"
+      },
+      "description": "Start / Stop Voice Dictation"
+    }
+  }
+}

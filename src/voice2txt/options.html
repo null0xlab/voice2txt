@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>voice2txt - Settings</title>
+  <link rel="stylesheet" href="popup.css">
+  <style>
+    body {
+      width: 100%;
+      min-height: 100vh;
+      background: var(--bg-gradient);
+      padding: 40px 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .settings-container {
+      width: 100%;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .settings-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .settings-logo {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, var(--accent-cyan) 0%, var(--accent-purple) 100%);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 15px var(--accent-cyan-glow);
+    }
+
+    .settings-logo svg {
+      width: 24px;
+      height: 24px;
+      color: #fff;
+    }
+
+    .settings-title-group h1 {
+      font-size: 1.6rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #fff 40%, var(--accent-cyan) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .settings-title-group p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .grid-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    @media (max-width: 768px) {
+      .grid-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .setting-section {
+      background: rgba(25, 20, 45, 0.4);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .section-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* Mic Permission Panel */
+    .mic-status-card {
+      background: rgba(0, 0, 0, 0.2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .status-info {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .status-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background-color: var(--text-muted);
+      display: inline-block;
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+    }
+
+    .status-dot.granted {
+      background-color: var(--accent-green);
+      box-shadow: 0 0 10px rgba(57, 255, 20, 0.5);
+    }
+
+    .status-dot.denied {
+      background-color: var(--accent-red);
+      box-shadow: 0 0 10px rgba(255, 56, 96, 0.5);
+    }
+
+    .status-text {
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .action-btn.permission-btn {
+      width: 100%;
+      padding: 12px;
+      font-size: 0.95rem;
+    }
+
+    .action-btn.permission-btn.success {
+      background: rgba(57, 255, 20, 0.1);
+      border: 1px solid rgba(57, 255, 20, 0.3);
+      color: #b3ffb3;
+      cursor: default;
+      box-shadow: none;
+    }
+
+    /* Form Styles */
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .form-group label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+    }
+
+    .help-box {
+      background: rgba(0, 210, 255, 0.05);
+      border: 1px solid rgba(0, 210, 255, 0.1);
+      border-radius: 10px;
+      padding: 12px;
+      font-size: 0.85rem;
+      color: #b3ecff;
+      line-height: 1.4;
+    }
+
+    .instructions-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    .instruction-step {
+      display: flex;
+      gap: 12px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    .step-number {
+      background: var(--bg-input);
+      border: 1px solid var(--border);
+      color: var(--accent-cyan);
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      flex-shrink: 0;
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: rgba(57, 255, 20, 0.15);
+      border: 1px solid rgba(57, 255, 20, 0.3);
+      color: #b3ffb3;
+      padding: 12px 24px;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      backdrop-filter: blur(8px);
+      box-shadow: var(--shadow);
+      display: none;
+      z-index: 100;
+      animation: fadeIn 0.3s ease-out;
+    }
+  </style>
+</head>
+<body>
+  <div class="settings-container">
+    <header class="settings-header">
+      <div class="settings-logo">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/>
+          <path d="M19 10a1 1 0 0 0-1 1v1a7 7 0 0 1-14 0v-1a1 1 0 0 0-2 0v1a9 9 0 0 0 8 8.94V21h-2a1 1 0 0 0 0 2h6a1 1 0 0 0 0-2h-2v-1.06A9 9 0 0 0 22 11v-1a1 1 0 0 0-1-1z"/>
+        </svg>
+      </div>
+      <div class="settings-title-group">
+        <h1>voice2txt Settings</h1>
+        <p>Configure speech-to-text dictation parameters</p>
+      </div>
+    </header>
+
+    <div id="warningBanner" class="alert-box" style="display: none; background: rgba(255, 56, 96, 0.15); border: 1px solid rgba(255, 56, 96, 0.3); color: #ffb3c1; padding: 16px; border-radius: 12px; margin-bottom: 24px; font-weight: 500; font-size: 0.9rem; flex-direction: row; align-items: center; gap: 12px; animation: fadeIn 0.3s ease-out;">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0;"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+      <span id="warningMessage"></span>
+    </div>
+
+    <main class="grid-layout">
+      <!-- Left Column: Permission & Setup -->
+      <section class="setting-section">
+        <div class="section-title">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+          Microphone Configuration
+        </div>
+
+        <div class="mic-status-card">
+          <div class="status-info">
+            <span id="statusDot" class="status-dot"></span>
+            <span id="statusLabel" class="status-text">Checking Access...</span>
+          </div>
+        </div>
+
+        <button id="grantMicBtn" class="action-btn primary permission-btn">Enable Microphone Access</button>
+
+        <div class="form-group">
+          <label>Keyboard Shortcut</label>
+          <div class="help-box">
+            Toggle dictation anytime by pressing <strong>Alt + L</strong> (or <strong>⌥ + L</strong> on Mac).
+          </div>
+          <button id="shortcutBtn" class="action-btn secondary" style="margin-top: 8px;">Configure Hotkeys</button>
+        </div>
+      </section>
+
+      <!-- Right Column: Preferences & Usage -->
+      <section class="setting-section">
+        <div class="section-title">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+          </svg>
+          Transcription Preferences
+        </div>
+
+        <div class="form-group">
+          <label for="dictationLang">Dictation Language</label>
+          <select id="dictationLang" class="styled-select">
+            <!-- Populated dynamically from languages.js -->
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Text Processing & Formatting</label>
+          <div style="display: flex; flex-direction: column; gap: 10px; background: rgba(0,0,0,0.2); padding: 12px; border-radius: 10px; border: 1px solid var(--border);">
+            <label style="display: flex; align-items: center; gap: 10px; text-transform: none; font-size: 0.9rem; cursor: pointer; color: var(--text-main);">
+              <input type="checkbox" id="autoPunctuationToggle" checked style="accent-color: var(--accent-cyan); width: 16px; height: 16px;">
+              <span>Auto-Punctuation & Verbal Commands (e.g. "period", "comma", "new line")</span>
+            </label>
+            <label style="display: flex; align-items: center; gap: 10px; text-transform: none; font-size: 0.9rem; cursor: pointer; color: var(--text-main);">
+              <input type="checkbox" id="autoCapitalizationToggle" checked style="accent-color: var(--accent-cyan); width: 16px; height: 16px;">
+              <span>Auto-Capitalization (Capitalize start of sentences)</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>How to Use</label>
+          <div class="instructions-list">
+            <div class="instruction-step">
+              <span class="step-number">1</span>
+              <div>Click inside any input text field on any webpage.</div>
+            </div>
+            <div class="instruction-step">
+              <span class="step-number">2</span>
+              <div>Press <strong>Alt + L</strong> or click the extension microphone icon in the toolbar.</div>
+            </div>
+            <div class="instruction-step">
+              <span class="step-number">3</span>
+              <div>Start speaking. The text will insert in real-time at your cursor position!</div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div id="toast" class="toast">Language preference saved!</div>
+
+  <script src="languages.js"></script>
+  <script src="options.js"></script>
+</body>
+</html>
