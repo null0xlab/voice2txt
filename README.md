@@ -12,9 +12,7 @@ An open-source browser extension designed to provide a polished, reliable, and c
 *(Video demo placeholder - coming soon)*
 
 ### Screenshots
-<!-- PLACEHOLDER: Add your interface screenshot images here -->
-<!-- Example: ![Popup Interface](/path/to/screenshot.png) -->
-*(Interface screenshot placeholder - coming soon)*
+[![IMG-20260916-200037-293.jpg](https://i.postimg.cc/tRnKXF24/IMG-20260916-200037-293.jpg)](https://postimg.cc/t7ySkZKK)
 
 ---
 
