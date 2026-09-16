@@ -7,7 +7,7 @@ An open-source browser extension designed to provide a polished, reliable, and c
 ## Demo & Visuals
 
 ### Video Demo
- [![Demon & Setup Video](https://img.youtube.com/vi/VIDEO_ID/0.jpg)](https://youtu.be/D3AUQks3QQY)
+ [![Demon & Setup Video]](https://youtu.be/D3AUQks3QQY)
 
 ### Screenshots
 [![IMG-20260916-200037-293.jpg](https://i.postimg.cc/tRnKXF24/IMG-20260916-200037-293.jpg)](https://postimg.cc/t7ySkZKK)
