@@ -14,6 +14,10 @@ An open-source browser extension designed to provide a polished, reliable, and c
 ### Screenshots
 [![IMG-20260916-200037-293.jpg](https://i.postimg.cc/tRnKXF24/IMG-20260916-200037-293.jpg)](https://postimg.cc/t7ySkZKK)
 
+[![IMG-20260916-200037-852.jpg](https://i.postimg.cc/zXJFdrbJ/IMG-20260916-200037-852.jpg)](https://postimg.cc/Z0MNRXxg)
+
+[![IMG-20260916-200319.jpg](https://i.postimg.cc/SxH8pFsh/IMG-20260916-200319.jpg)](https://postimg.cc/MnbXyLVP)
+
 ---
 
 ## Why voice2txt?
